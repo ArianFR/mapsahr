@@ -1,7 +1,9 @@
 p1n = int(input("how many days?: "))
 p1d = list(map(str, input("which weekdays?: ").split(" ")))
+
 p2n = int(input("how many days?: "))
 p2d =list(map(str, input("which weekdays?: ").split(" ")))
+
 p3n = int(input("how many days?: "))
 p3d = list(map(str, input("which weekdays?: ").split(" ")))
 
