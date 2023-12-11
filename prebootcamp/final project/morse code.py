@@ -8,7 +8,6 @@ with open('dictionary.py', 'r') as of:
         key, value = line.split('=')
         morse_dict[key.strip()] = value.strip()
 
-
 def convertm(jx):
 
     morse_sen = []
@@ -25,52 +24,33 @@ def convertm(jx):
 
     return morse_sen
 
-
-def fkv(dx, valx):
-    kv = ''
-    for key, value in dx.items():
-        if value == valx:
-            kv = kv + key
-    return kv
+inv_map = {v: k for k, v in morse_dict.items()}
+new_dict = {key.replace("'", ''): value for key, value in inv_map.items()}
 
 def convertj(mx):
 
-    global morse_dict
+    global new_dict
+    sentence = ''
 
-    splited_sen = list(mx.split('     '))
-    splited = ''
+    splited_sen =mx.split(' ')
 
     for i in splited_sen:
-        splited_word = i.split(' ')
-
-        for i in splited_word:
-            for j in morse_dict.values():
-                if ord(i) == 32:
-                    continue
-                else:
-                    kv = fkv(morse_dict, j)
-                mkv = mkv + kv
+        if i == '':
+            sentence += ' '
+        for j in new_dict:
+            if j == i:
+                j = new_dict[j]
+                sentence += j
 
 
 
 
+    return sentence
 
-
-
-
-
-
-
-for i in jomle:
-
-    if i != '.' or i != '-':
-        converted = convertm(jomle)
-
-        print(''.join(converted).replace("'", ""))
-        break
-
-    else:
-
-
-
-
+if any(char in jomle for char in ['.', '-']):
+    converted = convertj(jomle)
+    converted = converted.replace('    ', ' ')
+    print(converted)
+else:
+    converted = convertm(jomle)
+    print(''.join(converted).replace("'", ""))

@@ -9,35 +9,62 @@ with open('dictionary.py', 'r') as of:
         morse_dict[key.strip()] = value.strip()
 
 
+def convertm(jx):
 
-def find_key(dictionary, value):
-    for key, val in dictionary.items():
-        if val == value:
-            return key
-    return None
-
-
-def convertj(mx):
-    mkv = ''
-    jkv = ''
-
+    morse_sen = []
     global morse_dict
 
-    splited_sen = mx.split('     ')
+    for jh in jx: #jh = jomle harf
+        if ord(jh) == 32:
+            morse_sen.append(morse_dict['space'])
+        else:
+            for harf in morse_dict:
+                if jh == harf:
+                    morse_sen.append(morse_dict[harf])
+                    morse_sen.append(' ')
 
-    for word in splited_sen:
-        for char in word.split(' '):
-            for code in morse_dict.values():
-                if char == code:
-                    jkv = find_key(morse_dict, code)
-                    mkv += jkv
-    print(mkv)
-
-
-convertj(jomle)
+    return morse_sen
 
 
 
+inv_map = {v: k for k, v in morse_dict.items()}
+
+def convertj(mx):
+
+    global inv_map
+    sentence = []
+
+    splited_sen =mx.split(' ')
+    #splited_word = str(splited_sen.split(' ')).strip('[')
+    splited = ''
+
+    for i in splited_sen:
+        for j in inv_map:
+            for key, value in inv_map.items():
+                if i == key:
+                    sentence.append(value)
+
+    return sentence
+
+
+converted = convertj(jomle)
+print(converted)
+
+
+for i in jomle:
+
+    if i != '.' or i != '-':
+        converted = convertm(jomle)
+
+        print(''.join(converted).replace("'", ""))
+        break
+
+    else:
+
+        converted = convertj(jomle)
+
+        print(converted)
+        break
 
 
 
