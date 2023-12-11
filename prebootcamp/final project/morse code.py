@@ -42,12 +42,9 @@ def convertj(mx):
                 j = new_dict[j]
                 sentence += j
 
-
-
-
     return sentence
 
-if any(char in jomle for char in ['.', '-']):
+if any(char in jomle[0:3] for char in ['.', '-']):
     converted = convertj(jomle)
     converted = converted.replace('    ', ' ')
     print(converted)
